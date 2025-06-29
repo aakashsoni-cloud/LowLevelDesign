@@ -59,6 +59,7 @@ Non-Functional Requirements
 
 <b>ParkingFloor</b>
 - floorId
+- floorName
 - floorNumber
 - isFull
 - isClosed
