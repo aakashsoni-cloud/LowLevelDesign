@@ -44,6 +44,7 @@ Non-Functional Requirements
 <b>ParkingSpot</b>
 -- Associated with a vehicle
 - spotId
+- spotName
 - spotType (ENUM) IS-A-RELATIONSHIP -> (COMPACT, LARGE, EV_CHARGING, HANDICAPPED, VIP)
 - isAvailable
 - isClosed
@@ -53,6 +54,8 @@ Non-Functional Requirements
 - +parkVehicle(vehicle) -> Associated with the vechile
 - +unparkVehicle(vehicle)
 - +isAvaliable()
+
+</br>
 
 <b>ParkingFloor</b>
 - floorId
@@ -74,6 +77,7 @@ Non-Functional Requirements
 - +unparkVehicle(vehicle, spot)
      * spot.unparkVehicle(vehicle)
 
+</br>
 
 <b>ParkingLot</b>
 - lotId
@@ -102,6 +106,8 @@ Non-Functional Requirements
 - +updateDisplayPanel
 - +addFloors(floor)
 
+</br>
+
 <b>ParkingTicket</b>
 - ticketId
 - vehicle: Vehicle
@@ -114,6 +120,8 @@ Non-Functional Requirements
 - totalCost
 - paymentStatus: PaymentService
 
+</br>
+
 <b>EntryGate</b>
 - gateId
 - paymentPlan: (ENUM) IS-A-RELATIONSHIP  -> (hourly, Daily)
@@ -122,13 +130,16 @@ Non-Functional Requirements
 - +openGate()
 - +closeGate()
 
+</br>
 
 <b>ExitGate</b>
 - checkout(ParkingTicket)
 - calculateAmount(vehicle, spot, entryTime, exitTime): Numeric Value
 
+</br>
 
-<b>PaymentService</B>
-- paymentMethod: (ENUM) IS-A-RELATIONSHIP -> (UPI, CARD)
+<b>Payment</B>
+- paymentMode: (ENUM) IS-A-RELATIONSHIP -> (UPI, CARD)
+
 - +makePayment(ticket, paymentMethod)
 - +refund()
