@@ -35,10 +35,98 @@ Non-Functional Requirements
 ## Step 2 - Identifying Entities and define relationships
 
 <b>Vehicle</b>
-- vehicleId - <UNIQUE>
+- vehicleId
 - licensePlate
-- vehicleType - (RELATIONSHIP) - ENUM -> Car, Electirc, Truck, 2 Wheeler, 3 Wheeler
+- vehicleType (ENUM) IS-A-RELATIONSHIP  -> (CAR, ELECTRIC_CAR, TRUCK, TWO_WHEELER, THREE_WHEELER)
 
-<b>ParkingSpot</>
+<b>ParkingSpot</b>
+-- Associated with a vehicle
 - spotId
-- 
+- spotType (ENUM) IS-A-RELATIONSHIP -> (COMPACT, LARGE, EV_CHARGING, HANDICAPPED, VIP)
+- isAvailable
+- isClosed
+- sensorId
+- floorNumber: Help to decide the floor to parking spot
+
+- +parkVehicle(vehicle) -> Associated with the vechile
+- +unparkVehicle(vehicle)
+- +isAvaliable()
+
+<b>ParkingFloor</b>
+- floorId
+- floorNumber
+- isFull
+- isClosed
+- parkingSpots: List[<ParkingSpot>]  => Composition Relationship
+- floorDisplay
+
+- +getAvaliableParkingSpot(spotType): spot
+- +allocateSpot(vehicle)
+- +removeSpot(spot)
+- +getOccupiedSpot(): List[<Spot>]
+- markFull()
+- unmarkFull()
+- +updateDisplayBoard()
+- +parkVechile(vehicle, spot): spot
+     * spot.parVehicle(vehicle)
+- +unparkVehicle(vehicle, spot)
+     * spot.unparkVehicle(vehicle)
+
+
+<b>ParkingLot</b>
+- lotId
+- name
+- address
+- parkingFloors: List[<ParkingFloor>]
+- isClosed
+- isFull
+- entryPanel
+- exitPanel
+- displayPanel
+- ticketSystem
+
+- +parkVehicle(vehicle): Ticket 
+    * loop throught the floors and allow parking
+       * if the parking floor is full / closed then
+       * delegrate the parking floor
+
+    * Get avaliable spot
+        * Iterate over the floors
+        * Figure out the appropriate spot
+    
+    * use entryPanel to see available space  
+
+- +exitVehicle(Ticket)
+- +updateDisplayPanel
+- +addFloors(floor)
+
+<b>ParkingTicket</b>
+- ticketId
+- vehicle: Vehicle
+- spot: ParkingSpot
+- entryTime
+- exitTime
+- status: ACTIVE/CLOSED
+- isPaid
+- floor: ParkingFloor
+- totalCost
+- paymentStatus: PaymentService
+
+<b>EntryGate</b>
+- gateId
+- paymentPlan: (ENUM) IS-A-RELATIONSHIP  -> (hourly, Daily)
+
+- +generateTicket(vehicle, spot, floor): ParkingTicket
+- +openGate()
+- +closeGate()
+
+
+<b>ExitGate</b>
+- checkout(ParkingTicket)
+- calculateAmount(vehicle, spot, entryTime, exitTime): Numeric Value
+
+
+<b>PaymentService</B>
+- paymentMethod: (ENUM) IS-A-RELATIONSHIP -> (UPI, CARD)
+- +makePayment(ticket, paymentMethod)
+- +refund()
