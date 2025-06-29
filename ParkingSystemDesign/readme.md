@@ -39,6 +39,8 @@ Non-Functional Requirements
 - licensePlate
 - vehicleType (ENUM) IS-A-RELATIONSHIP  -> (CAR, ELECTRIC_CAR, TRUCK, TWO_WHEELER, THREE_WHEELER)
 
+<br>
+
 <b>ParkingSpot</b>
 -- Associated with a vehicle
 - spotId
