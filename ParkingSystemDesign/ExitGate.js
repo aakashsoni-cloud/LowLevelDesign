@@ -1,5 +1,6 @@
 class ExitGate {
-    constructor() {
-        return;
+    constructor(amount, exitTime) {
+        this.amount = amount;
+        this.exitTime = exitTime
     }
 } 
