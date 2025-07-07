@@ -1,0 +1,5 @@
+class ExitGate {
+    constructor() {
+        return;
+    }
+} 
